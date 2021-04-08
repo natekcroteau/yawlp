@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, ScrollView, StyleSheet } from 'react-native'
+import RestaurantCard from './RestaurantCards'
+
 
 const apiKey = 'PzsrrE3TpGEyCwAJJnktw1NxdcRr3ho2acYbNt0H-b-8z4R9zbkbL7otHcWRSxlApO_3G5KtYyqk5umLse-Bza1rBWB43RGQ415PrWPtS0BHUHWQkv7NIE1jlORkYHYx'
 const apiURL = 'https://api.yelp.com/v3/businesses/search?term=restaurants&location=Boulder'
@@ -20,19 +22,19 @@ export default function RestaurantsContainer() {
       }, [])
 
     const showRestaurants = () => restaurants.map(restaurant => {
-        return <Text>{restaurant.name}</Text>
+        return <RestaurantCard key={restaurant.id} restaurant={restaurant} > {restaurant.name} </RestaurantCard>
     })
 
     return (
-        <View styles={styles.container}>
+        <ScrollView styles={styles.container} >
             {showRestaurants()}
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-    }
+        margin: 15,
+    },
 })
