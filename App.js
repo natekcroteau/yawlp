@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, SafeAreaView } from 'react-native'
 import { createStore } from 'redux'
 import reducers from './reducers'
 import { Provider } from 'react-redux'
@@ -13,9 +13,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <RestaurantsContainer />
-      </View>
+      </SafeAreaView>
     </Provider>
   );
 }

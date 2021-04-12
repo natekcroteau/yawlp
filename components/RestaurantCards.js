@@ -14,8 +14,8 @@ export default function RestaurantCards({restaurant, index}) {
                 <Text style={styles.rating}>Rating: {restaurant.rating}/5</Text>
                 <Text style={styles.address}>{restaurant.location.address1}</Text>
                 <View style={[styles.rowView, {justifyContent: 'flex-start'}]}>
-                    {restaurant.categories.map(category => {
-                        return <Text>{category.title}, </Text>
+                    {restaurant.categories.map((category, index) => {
+                        return <Text key={index}>{category.title}, </Text>
                     })}
                 </View>
                 <TouchableOpacity style={styles.visitWebsiteButton}>
