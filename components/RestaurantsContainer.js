@@ -21,12 +21,15 @@ export default function RestaurantsContainer() {
           
       }, [])
 
-    const showRestaurants = () => restaurants.map(restaurant => {
-        return <RestaurantCard key={restaurant.id} restaurant={restaurant} > {restaurant.name} </RestaurantCard>
+    const showRestaurants = () => restaurants.map((restaurant, i) => {
+        return <RestaurantCard 
+            key={restaurant.id} 
+            restaurant={restaurant} 
+            index={i + 1} />
     })
 
     return (
-        <ScrollView styles={styles.container} >
+        <ScrollView style={styles.container} >
             {showRestaurants()}
         </ScrollView>
     )
