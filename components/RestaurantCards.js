@@ -1,8 +1,19 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity, Linking } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 export default function RestaurantCards({restaurant, index}) {
+
+    const dispatch = useDispatch()
+    
+
+    const handleFavorite = () => {
+        dispatch({ type: 'ADD_FAVORITES', favorite: restaurant})
+    }
+
+
     return (
         <View style={styles.container}>
             <Image style={styles.cardImage} source={{uri: restaurant.image_url}} />
@@ -11,12 +22,20 @@ export default function RestaurantCards({restaurant, index}) {
                     <Text style={styles.name} >{index}. {restaurant.name}</Text>
                     <Text style={styles.price}>{restaurant.price}</Text>
                 </View>
-                <Text style={styles.rating}>Rating: {restaurant.rating}/5</Text>
-                <Text style={styles.address}>{restaurant.location.address1}</Text>
-                <View style={[styles.rowView, {justifyContent: 'flex-start'}]}>
-                    {restaurant.categories.map((category, index) => {
-                        return <Text key={index}>{category.title}, </Text>
-                    })}
+                <View style={styles.detailsContainer}>
+                    <View style={styles.detailsColumn}>
+                        <Text style={styles.rating}>Rating: {restaurant.rating}/5</Text>
+                        <Text style={styles.address}>{restaurant.location.address1}</Text>
+                        <View style={[styles.rowView, {justifyContent: 'flex-start'}]}>
+                            {restaurant.categories.map((category, index) => {
+                                return <Text key={index}>{category.title}, </Text>
+                            })}
+                        </View>
+                    </View>
+                    <TouchableOpacity onPress={handleFavorite()}>
+                        <Ionicons name="heart" size={24} color="red" style={styles.detailsColumn} />
+                    </TouchableOpacity>
+                    
                 </View>
                 <TouchableOpacity style={styles.visitWebsiteButton}>
                     <Text style={styles.buttonText} onPress={() => {Linking.openURL(restaurant.url)}}> Visit Website </Text>
@@ -40,6 +59,12 @@ const styles = StyleSheet.create({
     },
     infContainer: {
         marginVertical: 15,
+    },
+    detailsContainer: {
+        flexDirection: 'row'
+    },
+    detailsColumn: {
+        
     },
     rowView: {
         flexDirection: 'row',
