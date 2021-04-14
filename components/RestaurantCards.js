@@ -10,7 +10,7 @@ export default function RestaurantCards({restaurant, index}) {
     
 
     const handleFavorite = () => {
-        dispatch({ type: 'ADD_FAVORITES', favorite: restaurant})
+        dispatch({ type: 'ADD_FAVORITE', favorite: restaurant})
     }
 
 
@@ -32,13 +32,13 @@ export default function RestaurantCards({restaurant, index}) {
                             })}
                         </View>
                     </View>
-                    <TouchableOpacity onPress={handleFavorite()}>
+                    <TouchableOpacity onPress={handleFavorite}>
                         <Ionicons name="heart" size={24} color="red" style={styles.detailsColumn} />
                     </TouchableOpacity>
                     
                 </View>
                 <TouchableOpacity style={styles.visitWebsiteButton}>
-                    <Text style={styles.buttonText} onPress={() => {Linking.openURL(restaurant.url)}}> Visit Website </Text>
+                    <Text style={styles.buttonText} onPress={ () => {Linking.openURL(restaurant.url)} }> Visit Website </Text>
                 </TouchableOpacity>
             </View>
         </View>
